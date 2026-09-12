@@ -1,7 +1,11 @@
+import { redirect } from '@sveltejs/kit';
 import { requireUser } from '$lib/server/guard';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ locals }) => {
+	if (typeof locals.auth !== 'function') {
+		redirect(307, '/sign-in');
+	}
 	const session = await requireUser(locals);
 
 	return {

@@ -3,20 +3,24 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import '../app.css';
 
-	let { children } = $props();
+	let { children, data } = $props();
 </script>
 
 <svelte:head>
-	<title>Administración</title>
+	<title>Aura Detail · Car detailing</title>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<ClerkProvider
-	signInUrl="/sign-in"
-	signUpUrl="/sign-up"
-	signInFallbackRedirectUrl="/dashboard"
-	signUpFallbackRedirectUrl="/dashboard"
-	afterSignOutUrl="/sign-in"
->
+{#if data.clerkEnabled}
+	<ClerkProvider
+		signInUrl="/sign-in"
+		signUpUrl="/sign-up"
+		signInFallbackRedirectUrl="/dashboard"
+		signUpFallbackRedirectUrl="/dashboard"
+		afterSignOutUrl="/"
+	>
+		{@render children()}
+	</ClerkProvider>
+{:else}
 	{@render children()}
-</ClerkProvider>
+{/if}
