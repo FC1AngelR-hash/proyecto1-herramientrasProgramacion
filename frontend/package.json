@@ -4,6 +4,8 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+	"build": "cd src/frontend && npm install && npm run build",
+    "start": "node src/backend/index.js",
 	"dev": "vite dev",
 	"build": "vite build",
 	"preview": "vite preview",
